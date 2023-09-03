@@ -1,0 +1,36 @@
+from tkinter import *
+root=Tk()
+root.title("HOSTEL MANAGEMENT")
+l1=Label(text="HOSTEL MANAGEMENT", font=('COMIC',50),bg="blue").pack()
+
+def  bt1():
+    registration=Tk()
+
+def bt3e():
+    e1=Entry(textvariable=a).place(x=600, y=50)
+    bt4=Button(text="FEE STRUCTURE",fg='white' , bg='black', font=(5), command=clicked).place(x=725,y=100)
+def clicked():
+    x2=a.get()
+    print(x2)
+    l2=Label(text=x2).place(x=1102, y=150)
+def bt3():
+    l3=Label(text)
+
+    
+a=StringVar()
+bt1=Button(text="REGISTRATION",fg='white' , bg='black', font=(5),command=bt1).place(x=25,y=100)
+bt2=Button(text="HOSEL DETAILS & INFRASTURCTURE",fg='white' , bg='black', font=(5)).place(x=175,y=100)
+bt3=Button(text="STUDENT DETAILS",fg='white' , bg='black', font=(5),command=bt3e).place(x=500 , y=100)
+
+bt5=Button(text="STAFF DETAILS",fg='white' , bg='black', font=(5)).place(x=925, y=100)
+
+bt6=Button(text="RULES & REGULATION",fg='white' , bg='black', font=(5),command=clicked).place(x=1100,y=100)
+root.geometry("5400x720+0+5")
+root.mainloop
+
+
+
+
+
+
+                

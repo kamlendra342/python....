@@ -1,0 +1,35 @@
+import mysql.connector as sqltor
+myco=sqltor.connect(host="localhost", user="root", passwd="tiger", database="hostel_management")
+if myco.is_connected():
+    print("yes")
+cur= myco.cursor()
+cur.execute("select * from fee_structure")
+feestructure=cur.fetchall()
+print("              FEE STRUCTURE CHART")
+print(" Serial No.     Category     Month Range      FEE")
+print()
+for i in feestructure:
+    print(i[0],'  |  ',i[1],'  |  ',i[2],'  |  ',i[3])
+print()
+print("# Monthly fee :6000")
+print("# Fees should be submitted online in quaterly installment basis  ")
+
+print("# CAUTION MONEY : 2000 (to be once at time of registration)")
+print("# NOTE : all the above numeric value under fee are given in INDIAN CURRENCY only")
+cur.execute("select * from register")
+a=cur.fetchall()
+print(a)
+a=int(input("enter the id :"))
+b=input("enter name :")
+c=input("enter gender :")
+d=int(input("enter the class : "))
+e=input("enter mother's name :")
+f=input("enter father's name :")
+g=input("enter adress :")
+h=input("enter the e-mail adress :")
+i=input("enter the phone number :")
+st="insert into register(rid , st_name ,st_gender , st_class , stm_name , stf_name , st_adress , st_email , st_phoneno) VALUES({},'{}','{}',{},'{}','{}','{}','{}',{})".format(a,b,c,d,e,f,g,h,i)
+cur.execute(st)
+myco.commit()
+
+

@@ -1,0 +1,153 @@
+import mysql.connector as sqltor
+myco=sqltor.connect(host="localhost", user="root", passwd="tiger", database="hostel_management")
+if myco.is_connected():
+    print("yes")
+cur= myco.cursor()
+
+from tkinter import *
+from tkinter import messagebox
+
+
+root=Tk()
+root.title("HOSTEL MANAGEMENT")
+
+
+filename = PhotoImage(file = "C:\\Users\\Akash-PC\\Downloads\\output-onlinepngtools (3).png")
+background_label = Label(root, image=filename)
+background_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+
+
+l1=Label(text="HOSTEL MANAGEMENT", font=('comic sans ms',50,'bold'),bg="RosyBrown1").pack()
+root.iconbitmap(r'C:\Users\Akash-PC\Downloads\download.ico')
+
+
+registration= None
+n=None
+
+
+
+submit=None
+def  bt1():
+    global registration
+    registration=Toplevel()
+    registration.title("REGISTRATION WINDOW")
+
+    filename1 = PhotoImage(file = "C:\\Users\\Akash-PC\\Downloads\\output-onlinepngtools (4).png")
+    background_label1 = Label(registration, image=filename1)
+    background_label1.place(x=0, y=0, relwidth=1, relheight=1)
+
+    global n
+    cur.execute("select * from register")
+    for j in cur.fetchall():
+        X=j[0]
+    n=X
+    
+    l10=Label(registration,text="REGISTRATION ID :" + str(n+1) ,fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=50)
+    l11=Label(registration,text="STUDENT NAME :",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=80)
+    e11=Entry(registration,textvariable=b ,width=50,bg="PaleTurquoise1" ).place(x=170,y=80)
+    l12=Label(registration,text="GENDER :",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=110)
+    e12=Entry(registration, textvariable=c,width=50,bg="PaleTurquoise1").place(x=170,y=110)
+    l13=Label(registration,text="CLASS :",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=140)
+    e13=Entry(registration, textvariable=d,width=50,bg="PaleTurquoise1").place(x=170,y=140)
+    l14=Label(registration,text="MOTHER's NAME :",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=170)
+    e14=Entry(registration , textvariable=e,width=50,bg="PaleTurquoise1").place(x=170,y=170)
+    l15=Label(registration,text="FATHER's NAME :",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=200)
+    e15=Entry(registration,textvariable=f,width=50,bg="PaleTurquoise1").place(x=170,y=200)
+    l16=Label(registration,text="ADRESS :",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=230)
+    e16=Entry(registration, textvariable=g,width=50,bg="PaleTurquoise1").place(x=170,y=230)
+    l17=Label(registration,text="E-MAIL ID :",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=260)
+    e17=Entry(registration , textvariable= h,width=50,bg="PaleTurquoise1").place(x=170,y=260)
+    l18=Label(registration,text="PHONE NUMBER :",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=290)
+    e18=Entry(registration , textvariable= i,width=50,bg="PaleTurquoise1").place(x=170,y=290)
+    
+    bt11=Button(registration , text="Exit window" , fg="white" , bg="red", font=('arial',15, 'italic'),command=registration.destroy).place(x=50,y=500)
+    bt10=Button(registration,text=" SUBMIT ", fg="white" , bg="red", font=('arial',15, 'italic'), command=bt102).place(x=90,y=350)
+    if submit==1:
+        l101=Label(registration,text="Congratulation You Have Registered Successfully !!",fg="DarkOrchid4", font= ("Script", 40, "bold")).place(x=30,y=550)
+   
+    
+    
+    registration.geometry("550x550")
+    registration.mainloop
+
+
+def bt102():
+    print("computer")
+    x2=b.get()
+    x3=c.get()
+    x4=d.get()
+    x5=e.get()
+    x6=f.get()
+    x7=g.get()
+    x8=h.get()
+    x9=i.get()
+    print(x2)
+    submit=1
+    global n
+    n= n +1
+    global registration
+    submit=1
+
+    if  x2 !="" and x3 !="" and x4 !=0 and x5 !="" and x6 !="" and x7 !="" and x8 !="" and x9 !=0 :
+        st="insert into register(rid , st_name ,st_gender , st_class , stm_name , stf_name , st_adress , st_email , st_phoneno) VALUES({},'{}','{}',{},'{}','{}','{}','{}',{})".format( n,x2,x3,x4,x5,x6,x7,x8,x9)
+        cur.execute(st)
+        myco.commit()
+        l101=Label(registration,text="Congratulation You Have Registered",fg="DarkOrchid4" ,bg="turquoise1", font= ("Script", 40, "bold")).place(x=30,y=550)
+        registration.destroy()    
+    else :
+        messagebox.showerror("INCOMPLETE INFORMATION", "PLEASE FILL REQUIRED INFORMATION !! ")
+        
+   
+x2=x3=x4=x5=x6=x7=x8=x9=None
+b=StringVar()
+c=StringVar()
+d=IntVar()
+e=StringVar()
+f=StringVar()
+g=StringVar()
+h=StringVar()
+i=IntVar()
+
+
+def bt3e():
+    e1=Entry().place(x=600, y1=50)
+ 
+
+def clicked():
+    l2=Label(text="""        """).place(x=1102, y=150)
+
+def bt4():
+    cur.execute("select * from fee_structure")
+    feestructure=cur.fetchall()
+    feestruct=Toplevel()
+    feestruct.title("HOSTEL'S FEES STRUCTURE WINDOW")
+    l31=Label(feestruct,text="        FEE STRUCTURE CHART",font=('comic sans ms',15,"bold") ).place(x=75 ,y=10)
+    
+    a=0
+    l32=Label(feestruct,text="Serial No.|   Category        |  Month_Range   |    FEE",font='bold').place(x=75 ,y=45)
+    for i in feestructure:
+        a=a+20
+        s1=str(i[0])
+        s2=i[1]
+        s3=i[2]
+        s4=str(i[3])
+        l33=Label(feestruct,text='     '+s1+'         |  '+s2+' | '+s3+' | '+s4,font='bold').place(x=75 ,y=(50+a))
+    l34=Label(feestruct,text="# Monthly fee :6000",font=('comic sans ms',10,'italic')).place(x=75 ,y=140)
+    l35=Label(feestruct,text="# Fees should be submitted online in quaterly installment basis",font=('comic sans ms',10,'italic')).place(x=75 ,y=160)
+    l36=Label(feestruct,text="# CAUTION MONEY : 2000 (to be once at time of registration",font=('comic sans ms',10,'italic')).place(x=75 ,y=180)
+    l37=Label(feestruct,text="# NOTE : all the above numeric value under fee are given in INDIAN CURRENCY only",font=('comic sans ms',10,'italic')).place(x=75 ,y=200)
+    feestruct.geometry("700x500")
+
+bt1=Button(text="REGISTRATION",fg='white' , bg='black', font=(5), command=bt1).place(x=25,y=100)
+bt2=Button(text="HOSEL DETAILS & INFRASTURCTURE",fg='white' , bg='black', font=(5)).place(x=175,y=100)
+bt3=Button(text="STUDENT DETAILS",fg='white' , bg='black', font=(5),command=bt3e).place(x=500 , y=100)
+bt4=Button(text="FEE STRUCTURE",fg='white' , bg='black', font=(5), command=bt4).place(x=725,y=100)
+bt5=Button(text="STAFF DETAILS",fg='white' , bg='black', font=(5)).place(x=925, y=100)
+bt6=Button(text="RULES & REGULATION",fg='white' , bg='black', font=(5),command=clicked).place(x=1100,y=100)
+
+
+
+root.geometry("5400x720+0+5")
+root.mainloop
+

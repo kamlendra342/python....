@@ -1,0 +1,878 @@
+from tkinter import *
+from tkinter import messagebox
+from tkinter import font
+
+import mysql.connector as sqltor
+myco=sqltor.connect(host="localhost", user="root", passwd="tiger", database="hostel_management")
+if myco.is_connected():
+    print("yes")
+cur= myco.cursor()
+
+login=Tk()
+login.title("LOGIN WINDOW")
+
+
+from tkinter import messagebox
+filename = PhotoImage(file = "C:\\Users\\Akash-PC\\Downloads\\steffi-harms-Cj0tPzC5Uic-unsplash.png")
+background_label = Label(login, image=filename)
+background_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+
+registration= None
+n=None
+submit=None
+root=None
+sregistration=None
+sn=None
+x2=x3=x4=x5=x6=x7=x8=x9=x10=x11=None
+k1=k2=k3=k4=k5=k6=k7=None
+b=StringVar(None)
+var1=IntVar(None)
+var2=IntVar()
+var3=IntVar(None)
+var4=IntVar(None)
+var5=IntVar(None)
+var7=StringVar(None)
+var8=StringVar(None)
+d=IntVar(None)
+e=StringVar(None)
+f=StringVar(None)
+g=StringVar(None)
+h=StringVar(None)
+i=IntVar(0)
+k=StringVar(None)
+sidN =StringVar()
+l32 =""
+stfid=StringVar()
+g1=StringVar(None)
+g2=IntVar(None)
+g3=IntVar(None)
+g4=StringVar(None)
+g5=IntVar(None)
+g6=StringVar(None)
+gvar1=IntVar(None)
+gvar2=IntVar(None)
+staff_selectQuery=StringVar()
+st_selectQuery=StringVar()
+
+ID =StringVar()
+PASSWD=StringVar()
+
+f2 =Frame( relief='ridge', bd=15 ,highlightbackground="black", highlightcolor="black", highlightthickness=2,bg="light blue" ,width=350,height=200).place(x=500,y=240)
+
+enterPASSWD=Entry(login,textvariable=PASSWD)
+enterID=Entry(login,textvariable=ID)
+
+
+def RUN():
+
+    global ID
+    global PASSWD
+    if ID.get()=="1234" and PASSWD.get()=="tiger" :
+        global root
+        print("yes")
+        root=Tk()
+        root.title("HOSTEL MANAGEMENT")
+  
+
+    
+
+        Label(root,text="HOSTEL MANAGEMENT", bd=10,relief='ridge',padx=10,font=('comic sans ms',50,'bold'),bg="RosyBrown1").pack()
+        root.iconbitmap(r'C:\Users\Akash-PC\Downloads\download.ico')
+
+        
+    
+
+
+
+        def  st_registration_win():
+            global registration
+            registration=Toplevel()
+            registration.title("REGISTRATION WINDOW")
+
+            global n
+            cur.execute("select * from register")
+            for j in cur.fetchall():
+        
+                   X=j[0]
+            n=X
+
+
+            Label(registration,text="REGISTRATION ID :" + str(n+1) , bg='lightblue' , font=('arial' , 10 , 'italic')).place(x=45,y=50)
+            Label(registration,text="STUDENT NAME :",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=80)
+            entry_stName=Entry(registration,textvariable=b ,width=50,bg="PaleTurquoise1" )
+            Label(registration,text="GENDER :",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=110)
+
+            checkbutton_Male=Checkbutton(registration , text="Male  /" , bg='lightblue'  ,variable=var1,onvalue = 1, offvalue = 0)
+            checkbutton_Female=Checkbutton(registration , text="Female"  , bg='lightblue' ,variable=var2,onvalue = 1, offvalue = 0)
+            Label(registration, text="(select one of these)" , bg='lightblue' ).place(x=330, y=110)
+
+            checkbutton_RoomA=Checkbutton(registration , text="A"  , bg='lightblue' ,variable=var3,onvalue = 1, offvalue = 0)
+            checkbutton_RoomB=Checkbutton(registration , text="B"  , bg='lightblue' ,variable=var4,onvalue = 1, offvalue = 0)
+            checkbutton_RoomC=Checkbutton(registration , text="C"  , bg='lightblue' ,variable=var5,onvalue = 1, offvalue = 0)
+            Label(registration,text="ROOM TYPE:",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=350)
+    
+            Label(registration,text="CLASS :",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=140)
+            entry_stClass=Entry(registration, textvariable=d,width=50,bg="PaleTurquoise1")
+            Label(registration,text="MOTHER's NAME :",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=170)
+            entry_stmName=Entry(registration , textvariable=e,width=50,bg="PaleTurquoise1")
+            Label(registration,text="FATHER's NAME :",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=200)
+            entry_stfName=Entry(registration,textvariable=f,width=50,bg="PaleTurquoise1")
+            Label(registration,text="ADRESS :",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=230)
+            entry_stAdress=Entry(registration, textvariable=g,width=50,bg="PaleTurquoise1")
+            Label(registration,text="E-MAIL ID :",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=260)
+            entry_stEmail=Entry(registration , textvariable= h,width=50,bg="PaleTurquoise1")
+            Label(registration,text="PHONE NUMBER :",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=290)
+            entry_stNumber=Entry(registration , textvariable= i,width=50,bg="PaleTurquoise1")
+            Label(registration,text="DATE OF BIRTH (dd-mm-yyyy) :",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=320)
+            entry_stDoB=Entry(registration , textvariable= k,width=37,bg="PaleTurquoise1")
+
+            def deletion():
+                entry_stName.delete(0,END)
+                checkbutton_Male.deselect()
+                checkbutton_Female.deselect()
+                checkbutton_RoomA.deselect()
+                checkbutton_RoomB.deselect()
+                checkbutton_RoomC.deselect()
+                entry_stClass.delete(0,END)
+                entry_stmName.delete(0,END)
+                entry_stfName.delete(0,END)
+                entry_stAdress.delete(0,END)
+                entry_stEmail.delete(0,END)
+                entry_stNumber.delete(0,END)
+                entry_stDoB.delete(0,END)
+    
+            Button(registration , text="Exit window" , fg="white" , bg="red", font=('arial',15, 'italic'),command=registration.destroy).place(x=350,y=500)
+            Button(registration,text=" SUBMIT ", fg="white" , bg="red", font=('arial',15, 'italic'), command=bt102).place(x=200,y=390)
+            Button(registration,text=" CLEAR ENTRIES ",command=deletion).place(x=20 , y=20)
+
+
+            entry_stName.place(x=170,y=80)
+            checkbutton_Male.place(x=170,y=110)
+            checkbutton_Female.place(x=250,y=110)
+            entry_stClass.place(x=170,y=140)
+            entry_stmName.place(x=170,y=170)
+            entry_stfName.place(x=170,y=200)
+            entry_stAdress.place(x=170,y=230)
+            entry_stEmail.place(x=170,y=260)
+            entry_stNumber.place(x=170,y=290)
+            entry_stDoB.place(x=250,y=320)
+            checkbutton_RoomA.place(x=170,y=350)
+            checkbutton_RoomB.place(x=200,y=350)
+            checkbutton_RoomC.place(x=230,y=350)
+            
+           
+            registration.configure(bg="light blue")
+            registration.geometry("550x550")
+            registration.mainloop
+
+
+        def bt102():
+            print("computer")
+            global n
+            x2=b.get()
+    
+            if var1.get()==1:
+                x3="Male"
+                sid = str(n+1) +"B"
+            else :
+                x3="Female"
+                sid = str(n+1) +"G"
+
+            if var3.get()==1:
+                x11="A"
+            elif  var4.get()==1:
+                x11="B"
+                
+            else :
+                x11="C"
+                
+            
+            x4=d.get()
+            x5=e.get()
+            x6=f.get()
+            x7=g.get()
+            x8=h.get()
+            x9=i.get()
+            x10=k.get()
+            print(x2)
+            submit=1
+    
+        
+            global registration
+            submit=1
+
+            if  x4 <4 or x4 > 12 :
+                messagebox.showerror("DATA INADEQUATE" , "CLASS SHOULD LIE BETWEEN RANGE 4 to 12")
+            elif    x10=="" or ( int(x10[0:2]) <1 or int(x10[0:2])> 31 ) or  int(x10[3:5])<1 or (int(x10[3:5])>12 ) :
+                 messagebox.showerror("DATA INVALID" , " PLEASE ENTER VALID DATE ")
+            else:
+                if  x2 !="" and x3 !="" and x4 !=0 and x5 !="" and x6 !="" and x7 !=""  and x9 !=0 and x10 != "" and x11 != ""  :
+
+                    if (var1.get()==1 and  var2.get()==1  ) or(var4.get()==1 and  var3.get()==1) or (var5.get()==1 and  var3.get()==1) or (var4.get()==1 and  var5.get()==1) :
+                        messagebox.showwarning("INFORMATION NOT ACCEPTABLE" , "PLEASE FILL  INFORMATION  CORRECTLY !! ( GENDER ) / (ROOM) ")
+                    else :
+                        n= n +1
+                        st="insert into register(rid , st_name ,st_gender , st_class , stm_name , stf_name , st_adress , st_email , st_phoneno, DoR ,DoB, room ) VALUES({},'{}','{}',{},'{}','{}','{}','{}',{},NOW(),'{}','{}')".format( n,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11)
+                        cur.execute(st)
+                        myco.commit()
+                        l101=Label(registration,text="Congratulation You Have Registered",fg="DarkOrchid4" ,bg="turquoise1", font= ("Script", 40, "bold")).place(x=30,y=550)
+
+                        if var1.get()==1:
+                            cur.execute("insert into st_detailBS( sid, st_name ,st_gender , st_class , stm_name , stf_name , st_adress , st_email , st_phoneno, DoB, room ) VALUES('{}','{}','{}',{},'{}','{}','{}','{}',{},'{}','{}')".format(sid,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11))
+                            myco.commit()
+                        else :
+                            cur.execute("insert into st_detailGS( sid, st_name ,st_gender , st_class , stm_name , stf_name , st_adress , st_email , st_phoneno, DoB, room ) VALUES('{}','{}','{}',{},'{}','{}','{}','{}',{},'{}','{}')".format(sid,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11))
+                            myco.commit()
+            
+                        messagebox.showinfo(" REGISTRATION COMPLETED" , " CONGRATULATION YOU HAVE SUBMITTED SUCCESSFULLY !!!")
+                        registration.destroy()    
+                else :
+                    messagebox.showerror("INCOMPLETE INFORMATION", "PLEASE  FULFILL REQUIRED INFORMATION !! ")
+        
+
+
+
+        def bt3e():
+            global sidN
+            st_detail=Toplevel()
+            st_detail.title("STUDENT DETAIL WINDOW")
+            
+            def QUERY_st_detail():
+        
+        
+                st_queryB="select * from st_detailBS where sid ='{}'".format(sidN.get())
+                cur.execute(st_queryB)
+                st_Brecord=cur.fetchall()
+
+                if st_Brecord!=[]:
+                    print("dewesh")
+                    f32 =Frame(st_detail, relief='ridge' , highlightbackground="grey", highlightcolor="grey", highlightthickness=1,bg='light blue',width=275,height=250,bd=8).place(x=40 ,y=90)
+                    l321= Label(st_detail, text="STUDENT ID               :    "+st_Brecord[0][0],bg="light blue").place(x=50,y=100)
+                    l322= Label(st_detail, text="NAME                         :    "+st_Brecord[0][1],bg="light blue").place(x=50,y=120)
+                    l323= Label(st_detail, text="MOTHER's NAME     :    "+st_Brecord[0][4],bg="light blue").place(x=50,y=140)
+                    l324= Label(st_detail, text="FATHER's NAME       :    "+st_Brecord[0][5],bg="light blue").place(x=50,y=160)
+                    l325= Label(st_detail, text="CLASS                         :    "+str(st_Brecord[0][3]),bg="light blue").place(x=50,y=180)
+                    l326= Label(st_detail, text="GENDER                      :    "+st_Brecord[0][2],bg="light blue").place(x=50,y=200)
+                    l327= Label(st_detail, text="ADRESS                       :    "+st_Brecord[0][6],bg="light blue").place(x=50,y=220)
+                    l328= Label(st_detail, text="CONTACT NUMBER :     "+str(st_Brecord[0][8]),bg="light blue").place(x=50,y=240)
+                    l329= Label(st_detail, text="EMAIL ID                    :    "+st_Brecord[0][7],bg="light blue").place(x=50,y=260)
+                    l3210= Label(st_detail, text="DATE OF BIRTH                 :     "+str(st_Brecord[0][10]),bg="light blue").place(x=50,y=280)
+                    l3211= Label(st_detail, text="ROOM TYPE                :     "+str(st_Brecord[0][9]),bg="light blue").place(x=50,y=300)
+                    button = Button(st_detail, text="Clear",command=CLEAR_st_detail).place(x=100,y=350)
+                
+                st_queryG="select * from st_detailGS where sid ='{}'".format(sidN.get())
+                cur.execute(st_queryG)
+                st_Grecord=cur.fetchall()
+                
+                if (st_Grecord!=[]) :
+                    f33 =Frame(st_detail, relief='ridge', highlightbackground="grey", highlightcolor="grey", highlightthickness=1,bg='light blue',width=275,height=250,bd=8).place(x=40 ,y=90)
+                    l331= Label(st_detail, text="STUDENT ID               :     "+st_Grecord[0][0],bg="light blue").place(x=50,y=100)
+                    l332= Label(st_detail, text="NAME                         :     "+st_Grecord[0][8],bg="light blue").place(x=50,y=120)
+                    l333= Label(st_detail, text="MOTHER's NAME     :     "+st_Grecord[0][3],bg="light blue").place(x=50,y=140)
+                    l334= Label(st_detail, text="FATHER's NAME       :     "+st_Grecord[0][4],bg="light blue").place(x=50,y=160)
+                    l335= Label(st_detail, text="CLASS                         :     "+str(st_Grecord[0][2]),bg="light blue").place(x=50,y=180)
+                    l336= Label(st_detail, text="GENDER                      :     "+st_Grecord[0][1],bg="light blue").place(x=50,y=200)
+                    l337= Label(st_detail, text="ADRESS                       :     "+st_Grecord[0][5],bg="light blue").place(x=50,y=220)
+                    l338= Label(st_detail, text="CONTACT NUMBER :     "+str(st_Grecord[0][7]),bg="light blue").place(x=50,y=240)
+                    l339= Label(st_detail, text="EMAIL ID                    :     "+str(st_Grecord[0][6]),bg="light blue").place(x=50,y=260)
+                    l3310= Label(st_detail, text="DATE OF BIRTH                 :     "+str(st_Grecord[0][10]),bg="light blue").place(x=50,y=280)
+                    l3311= Label(st_detail, text="ROOM TYPE                :     "+str(st_Grecord[0][9]),bg="light blue").place(x=50,y=300)
+                    button = Button(st_detail, text="Clear",command=CLEAR_st_detail).place(x=100,y=350)
+                    
+
+                elif  st_Grecord==[] and st_Brecord==[] :
+                    messagebox.showerror("STUDENT UNIDENTIFIED"," STUDENT WITH SUCH ID DO NOT EXIST !!")
+                    
+                    
+        
+            l31=Label(st_detail , text =" STUDENT ID ").place(x=50 , y=50)
+            e31=Entry(st_detail , textvariable= sidN).place(x=150,y=50)
+            bt31=Button(st_detail , text="find" , command=QUERY_st_detail).place(x=300 , y=50)
+
+    
+            def CLEAR_st_detail():
+                
+                l421=Label(st_detail , text ="", width=50,bg="light blue").place(x=30,y=80)
+                l43 = Label(st_detail,text ="", width=50,bg="light blue").place(x=30,y=100)
+                l431= Label(st_detail, text ="", width=50,bg="light blue").place(x=30,y=100)
+                l432= Label(st_detail, text ="", width=50,bg="light blue").place(x=30,y=120)
+                l433= Label(st_detail, text ="", width=50,bg="light blue").place(x=30,y=140)
+                l434= Label(st_detail,text ="", width=50,bg="light blue").place(x=30,y=160)
+                l435= Label(st_detail, text ="", width=50,bg="light blue").place(x=30,y=180)
+                l436= Label(st_detail, text ="", width=50,bg="light blue").place(x=30,y=200)
+                l437= Label(st_detail,text ="", width=50,bg="light blue").place(x=30,y=220)
+                l438= Label(st_detail,text ="", width=50,bg="light blue").place(x=30,y=240)
+                l439= Label(st_detail, text ="""
+
+
+
+
+
+
+                                                 """, width=50,bg="light blue").place(x=30,y=260)
+                
+            st_detail.configure(bg="light blue")
+            Button(st_detail, text="EXIT WINDOW " ,width=65,bg='red' , fg='white',command=st_detail.destroy ).place(x=0,y=475)
+
+            Student_queryList=["NUMBER OF STUDENTS" , "TOTAL NUMBER OF ROOM" , "NUMBER OF BOYS" , "NUMBER OF GIRLS" , "NUMBER OF STUDENT IN EACH CLASS"]
+            
+            st_selectQuery.set("SELECT THE QUERY")
+            Frame(st_detail, relief='ridge', highlightbackground="grey", highlightcolor="grey", highlightthickness=1,bg='khaki1',width=450,height=500,bd=8).place(x=450 ,y=0)
+            st_QueryDropList=OptionMenu(st_detail ,st_selectQuery , Student_queryList[0],Student_queryList[1],Student_queryList[2] ,Student_queryList[3] , Student_queryList[4]  )
+            st_QueryDropList.config(width=35)
+            st_QueryDropList.place(x=490,y=25)
+
+            def executeQUERY():
+                if st_selectQuery.get()=="TOTAL NUMBER OF ROOM" :
+                    Label(st_detail, text="NUMBER OF ROOM : 500").place(x=500,y=80)
+                    cur.execute("Select Count(*) from register")
+                    no_of_room=cur.fetchall()
+                    Label(st_detail, text="NUMBER OF ROOM EMPTY : "+ str(500-(no_of_room[0][0]))).place(x=500,y=110)
+                    Label(st_detail, text="NUMBER OF ROOM FILLED :  "+str(no_of_room)[2:4]).place(x=500,y=140)      
+
+                elif st_selectQuery.get()=="NUMBER OF STUDENTS" :
+                    cur.execute("Select Count(*) from register")
+                    no_of_student=cur.fetchall()
+                    Label(st_detail, text="NUMBER OF STUDENTS :  "+str(no_of_student[0][0])).place(x=500,y=80)
+
+                elif st_selectQuery.get()== "NUMBER OF BOYS" :
+                    cur.execute("Select count(*) from st_detailBS")
+                    no_of_boys=cur.fetchall()
+                    Label(st_detail, text="NUMBER OF BOYS :  "+str(no_of_boys[0][0])).place(x=500,y=80)
+
+                elif st_selectQuery.get()== "NUMBER OF GIRLS" :
+                    cur.execute("Select  count(*) from st_detailGS ")
+                    no_of_girls=cur.fetchall()
+                    Label(st_detail, text="NUMBER OF GIRLS :  "+str(no_of_girls[0][0])).place(x=500,y=80)
+
+                elif st_selectQuery.get()=="NUMBER OF STUDENT IN EACH CLASS" :
+                    cur.execute(("select count(*) from register where st_class={}").format(4))
+                    Label(st_detail , text=" NUMBER OF STUDENT IN CLASS 4    =  "+str(cur.fetchall()[0][0])).place(x=500,y=80)
+                    cur.execute(("select count(*) from register where st_class={}").format(5))
+                    Label(st_detail , text=" NUMBER OF STUDENT IN CLASS 5    =  "+str(cur.fetchall()[0][0])).place(x=500,y=110)
+                    cur.execute(("select count(*) from register where st_class={}  ").format(6))
+                    Label(st_detail , text=" NUMBER OF STUDENT IN CLASS 6    =  "+str(cur.fetchall()[0][0])).place(x=500,y=140)
+                    cur.execute(("select count(*) from register where st_class={}  ").format(7))
+                    Label(st_detail , text=" NUMBER OF STUDENT IN CLASS  7   =  "+str(cur.fetchall()[0][0])).place(x=500,y=170)
+                    cur.execute(("select count(*) from register where st_class={} ").format(8))
+                    Label(st_detail , text=" NUMBER OF STUDENT IN CLASS 8    =  "+str(cur.fetchall()[0][0])).place(x=500,y=200)
+                    cur.execute(("select count(*) from register where st_class={}").format(9))
+                    Label(st_detail , text=" NUMBER OF STUDENT IN CLASS 9    =  "+str(cur.fetchall()[0][0])).place(x=500,y=230)
+                    cur.execute(("select count(*) from register where st_class={}  ").format(10))
+                    Label(st_detail , text=" NUMBER OF STUDENT IN CLASS 10   =  "+str(cur.fetchall()[0][0])).place(x=500,y=260)
+                    cur.execute(("select count(*) from register where st_class={}").format(11))
+                    Label(st_detail , text=" NUMBER OF STUDENT IN CLASS 11    =  "+str(cur.fetchall()[0][0])).place(x=500,y=290)
+                    cur.execute(("select count(*) from register where st_class={}").format(12))
+                    Label(st_detail , text=" NUMBER OF STUDENT IN CLASS 12   =  "+str(cur.fetchall()[0][0])).place(x=500,y=320)
+
+            def CLEAR_st_query():
+                Label(st_detail , text="""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          """, width=50,bg="khaki1" ).place(x=500, y=80)
+            
+                
+            Button(st_detail, text="EXECUTE " ,command=executeQUERY ).place(x=750,y=25)
+            Button(st_detail, text="CLEAR " ,command=CLEAR_st_query,bg='red' , fg='white' ).place(x=750,y=425)
+            
+            st_detail.geometry("900x500+170+100")
+            st_detail.mainloop
+
+
+        def staff():
+            
+            global sidN
+            staff_detail=Toplevel()
+            staff_detail.title("STAFF DETAIL WINDOW")
+            
+            def staff_query():
+        
+        
+                stf_query="select * from staff_detail where stfid ='{}'".format(stfid.get())
+                cur.execute(stf_query)
+                stf_record=cur.fetchall()
+
+                if stf_record!=[]:
+                    print("dewesh")
+                    Frame(staff_detail, relief='ridge' , highlightbackground="grey", highlightcolor="grey", highlightthickness=1,bg='light blue',width=320,height=250,bd=8).place(x=40 ,y=90)
+                    Label(staff_detail, text="STAFF ID                                    :    "+stf_record[0][0],bg="light blue").place(x=50,y=100)
+                    Label(staff_detail, text="NAME                                        :    "+stf_record[0][1],bg="light blue").place(x=50,y=120)
+                    Label(staff_detail, text="AGE                                            :    "+str(stf_recordst4[0][3]),bg="light blue").place(x=50,y=140)
+                    Label(staff_detail, text="DESIGNATION                          :    "+stf_record[0][5],bg="light blue").place(x=50,y=160)
+                    Label(staff_detail, text="GENDER                                      :    "+stf_record[0][2],bg="light blue").place(x=50,y=180)
+                    Label(staff_detail, text="CITY                                           :    "+stf_record[0][8],bg="light blue").place(x=50,y=200)
+                    Label(staff_detail, text="CONTACT NUMBER                :     "+str(stf_record[0][4]),bg="light blue").place(x=50,y=220)
+                    Label(staff_detail, text="SALARY   (in Rupees )              :    "+str(stf_record[0][6]),bg="light blue").place(x=50,y=240)
+                    Label(staff_detail, text="DATE OF APPOINTMENT       :     "+str(stf_record[0][7]),bg="light blue").place(x=50,y=260)
+                    Label(staff_detail, text="DATE OF RESIGNATION       :     "+str(stf_record[0][9]),bg="light blue").place(x=50,y=280)
+                    
+                    button = Button(staff_detail, text="Clear",command=CLEAR_staff_detail).place(x=100,y=350)
+                
+               
+                elif  st4==[] :
+                    messagebox.showerror("STAFF MEMBER UNIDENTIFIED"," STAFF WITH SUCH ID DO NOT EXIST !!")
+                    
+                    
+        
+            Label(staff_detail , text =" STAFF ID ").place(x=50 , y=50)
+            Entry(staff_detail , textvariable= stfid).place(x=150,y=50)
+            Button(staff_detail , text="find" , command=staff_query).place(x=300 , y=50)
+
+    
+            def CLEAR_staff_detail():
+                
+                Label(staff_detail , text ="", width=50,bg="light blue").place(x=30,y=80)
+                Label(staff_detail,text ="", width=50,bg="light blue").place(x=30,y=100)
+                Label(staff_detail, text ="", width=50,bg="light blue").place(x=30,y=100)
+                Label(staff_detail, text ="", width=50,bg="light blue").place(x=30,y=120)
+                Label(staff_detail, text ="", width=50,bg="light blue").place(x=30,y=140)
+                Label(staff_detail,text ="", width=50,bg="light blue").place(x=30,y=160)
+                Label(staff_detail, text ="", width=50,bg="light blue").place(x=30,y=180)
+                Label(staff_detail, text ="", width=50,bg="light blue").place(x=30,y=200)
+                Label(staff_detail,text ="", width=50,bg="light blue").place(x=30,y=220)
+                Label(staff_detail,text ="", width=50,bg="light blue").place(x=30,y=240)
+                Label(staff_detail, text ="""
+
+
+
+
+
+
+                                                 """, width=50,bg="light blue").place(x=30,y=260)
+                
+            staff_detail.configure(bg="light blue")
+            Button(staff_detail, text="EXIT WINDOW " ,width=65,bg='red' , fg='white',command=staff_detail.destroy ).place(x=0,y=575)
+
+
+            def staff_registration_win():
+                
+                global staff_registration
+                staff_registration=Toplevel()
+                staff_registration.title("STAFF REGISTRATION WINDOW")
+                X=0
+                global sn
+                cur.execute("select * from staff_detail")
+                for j in cur.fetchall():
+                    X=j[0][0:4]
+                sn=int(X)
+
+                Label(staff_registration,text="REGISTRATION ID :" + str(sn+1) , bg='lightblue' , font=('arial' , 10 , 'italic')).place(x=45,y=50)
+                Label(staff_registration,text=" NAME :",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=80)
+                staff_Name=Entry(staff_registration,textvariable=g1 ,width=50,bg="PaleTurquoise1" )
+                Label(staff_registration,text="GENDER :",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=110)
+
+                checkbutton_Male=Checkbutton(staff_registration , text="Male  /" , bg='lightblue'  ,variable=gvar1,onvalue = 1, offvalue = 0)
+                checkbutton_Female=Checkbutton(staff_registration , text="Female"  , bg='lightblue' ,variable=gvar2,onvalue = 1, offvalue = 0)
+                Label(staff_registration, text="(select one of these)" , bg='lightblue' ).place(x=330, y=110)
+
+                
+                Label(staff_registration,text="AGE:",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=140)
+                staff_Age=Entry(staff_registration, textvariable=g2,width=50,bg="PaleTurquoise1")
+                Label(staff_registration,text="CONTACT NUMBER:",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=170)
+                staff_No=Entry(staff_registration , textvariable=g3,width=50,bg="PaleTurquoise1")
+                Label(staff_registration,text="DESIGNSTION :",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=200)
+                staff_Post=Entry(staff_registration,textvariable=g4,width=50,bg="PaleTurquoise1")
+                Label(staff_registration,text="SALARY :",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=230)
+                staff_Salary=Entry(staff_registration, textvariable=g5,width=50,bg="PaleTurquoise1")
+                Label(staff_registration,text="CITY :",fg='OliveDrab1' , bg='midnight blue' , font=('arial' , 10 , 'italic')).place(x=45,y=260)
+                staff_City=Entry(staff_registration , textvariable= g6,width=50,bg="PaleTurquoise1")
+                
+                
+
+                def CLEAR_staffEntry():
+                    staff_Name.delete(0,END)
+                    checkbutton_Male.deselect()
+                    checkbutton_Female.deselect()
+                    
+                    staff_Age.delete(0,END)
+                    staff_No.delete(0,END)
+                    staff_Post.delete(0,END)
+                    staff_Salary.delete(0,END)
+                    staff_City.delete(0,END)
+
+                def ADD_staff():
+                    global sn
+                    if gvar1.get()==1:
+                        k2="Male"
+                        
+                    else :
+                        k2="Female"
+                    k1=g1.get()
+                    k3=g2.get()
+                    k4=g3.get()
+                    k5=g4.get()
+                    k6=g5.get()
+                    k7=g6.get()
+                    k8=str(sn+1 )+"S"
+                    if  k1 !="" and k2 !=0 and k3 !=0 and k4 !="" and k5 !=0 and k7 !=""  :
+
+                        if (gvar1.get()==1 and  gvar2.get()==1  ):
+                            messagebox.showwarning("INFORMATION NOT ACCEPTABLE" , "PLEASE FILL  INFORMATION  CORRECTLY !! ( GENDER )  ")
+                        else :
+                            
+                            st="insert into staff_detail(stfid , stf_name ,stf_gender , stf_age , stf_no , stf_post , salary, DoA, stf_city ) VALUES('{}','{}','{}',{},{},'{}',{},NOW(),'{}')".format( k8,k1,k2,k3,k4,k5,k6,k7)
+                            cur.execute(st)
+                            myco.commit()
+                            l101=Label(staff_registration,text="Congratulation You Have Registered",fg="DarkOrchid4" ,bg="turquoise1", font= ("Script", 40, "bold")).place(x=30,y=350)
+                            messagebox.showinfo(" REGISTRATION COMPLETED" , " CONGRATULATION YOU HAVE SUBMITTED SUCCESSFULLY !!!")
+                            staff_registration.destroy() 
+                    else :
+                        messagebox.showerror("INCOMPLETE INFORMATION", "PLEASE  FULFILL REQUIRED INFORMATION !! ")     
+                    
+
+                staff_registration.configure(bg="light blue")
+                staff_registration.geometry("550x550")
+                staff_registration.mainloop  
+                    
+
+                Button(staff_registration , text="Exit window" , fg="white" , bg="red", font=('arial',15, 'italic'),command=staff_registration.destroy).place(x=355,y=500)
+                Button(staff_registration,text=" SUBMIT ", fg="white" , bg="red", font=('arial',15, 'italic'), command=ADD_staff).place(x=200,y=390)
+                Button(staff_registration,text=" CLEAR ENTRIES ",command=CLEAR_staffEntry).place(x=20 , y=20)
+
+                staff_Name.place(x=190,y=80)
+                checkbutton_Male.place(x=190,y=110)
+                checkbutton_Female.place(x=270,y=110)
+                staff_Age.place(x=190,y=140)
+                staff_No.place(x=190,y=170)
+                staff_Post.place(x=190,y=200)
+                staff_Salary.place(x=190,y=230)
+                staff_City.place(x=190,y=260)
+                
+
+                    
+            Staff_queryList=[ "Number of Staff " ,
+                 "Warden Name" ,
+                 "Number of Mess Staff " ,
+                 "Number of Cleaner",
+                 "Number of Gaurd" ,
+                 "Number of Manager" ,
+                 "Head of Institution "]
+
+            
+            staff_selectQuery.set("Select The Query ")
+            Frame(staff_detail, relief='ridge', highlightbackground="grey", highlightcolor="grey", highlightthickness=1,bg='Khaki1',width=940,height=625,bd=8).place(x=410 ,y=0)
+            staff_QuerydropList=OptionMenu(staff_detail ,staff_selectQuery, Staff_queryList[0],Staff_queryList[1],Staff_queryList[2] ,Staff_queryList[3] , Staff_queryList[4] ,Staff_queryList[5] , Staff_queryList[6] )
+            staff_QuerydropList.config(width=25)
+            staff_QuerydropList.place(x=870,y=25)
+
+            def CLEAR_staff_query():
+                Label(staff_detail , text="""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                              """, width=129,bg='khaki1').place(x=430, y=80)
+
+            def execute_staff_query():
+                
+                if staff_selectQuery.get()=="Number of Staff " :
+                    cur.execute("select count(stfid) from staff_detail group by stf_post")
+                    no_of_staff=cur.fetchall()
+                    a=t=0
+                    
+                    designationList=['HEAD ', 'WARDEN' , "MANAGER" , "GAURD " , "COOK" , "SWEPPER" , "TOILET CLEANER" ," WASHERMAN"]
+                    for record in no_of_staff:
+                        
+                        Label(staff_detail , text=designationList[t]+"  : " +str(record[0]) ).place(x=500 , y=80+a)
+                        a=a+30
+                        t=t+1
+                    
+                    
+                    
+                elif staff_selectQuery.get()=="Warden Name":
+                    cur.execute(("select  stf_name from staff_detail where stfid='{}' ").format('1002S'))
+                    Label(staff_detail ,text ="WARDEN NAME  :   "+(cur.fetchall())[0][0]).place(x=500 , y=80)
+
+                elif staff_selectQuery.get()=="Number of Mess Staff ":
+                    cur.execute(("select count(*) from staff_detail where stf_post ='{}'").format('COOK'))
+                    Label(staff_detail , text ="Number of Mess Staff (Cook) :-" +str(cur.fetchall()[0][0])).place(x=500 , y=80)
+                    cur.execute(("select * from staff_detail where stf_post='{}'").format('COOK'))
+                    mess_record=cur.fetchall()
+                    a=0
+                    Label(staff_detail , text="STAFF ID", font=('arial' , 10 , 'bold')).place(x=428 , y=110+a)
+                    Label(staff_detail , text="NAME", font=('arial' , 10 , 'bold') ).place(x=498 , y=110+a)
+                    Label(staff_detail , text="GENDER", font=('arial' , 10 , 'bold') ).place(x=566 , y=110+a)
+                    Label(staff_detail , text="AGE" , font=('arial' , 10 , 'bold')).place(x=628 , y=110+a)
+                    Label(staff_detail , text="CONTACT NUMBER" , font=('arial' , 10 , 'bold')).place(x=663 , y=110+a)
+                    Label(staff_detail , text="DESIGNATION" , font=('arial' , 10 , 'bold')).place(x=793 , y=110+a)
+                    Label(staff_detail , text="SALARY" , font=('arial' , 10 , 'bold')).place(x=898 , y=110+a)
+                    Label(staff_detail , text="DATE OF APPOINTMENT" , font=('arial' , 10 , 'bold')).place(x=960 , y=110+a)
+                    Label(staff_detail , text="DATE OF RESGINATION " , font=('arial' , 10 , 'bold')).place(x=1123 , y=110+a)
+                    Label(staff_detail , text="CITY " , font=('arial' , 10 , 'bold')).place(x=1277 , y=110+a)
+                        
+                    for mess_staff_record in mess_record:
+                        Label(staff_detail , text=mess_staff_record[0] ).place(x=428 , y=140+a)
+                        Label(staff_detail , text=mess_staff_record[1] ).place(x=498 , y=140+a)
+                        Label(staff_detail , text=mess_staff_record[2] ).place(x=566 , y=140+a)
+                        Label(staff_detail , text=mess_staff_record[3] ).place(x=628 , y=140+a)
+                        Label(staff_detail , text=mess_staff_record[4] ).place(x=663 , y=140+a)
+                        Label(staff_detail , text=mess_staff_record[5] ).place(x=793 , y=140+a)
+                        Label(staff_detail , text=mess_staff_record[6] ).place(x=898 , y=140+a)
+                        Label(staff_detail , text=mess_staff_record[7] ).place(x=960 , y=140+a)
+                        Label(staff_detail , text=mess_staff_record[9] ).place(x=1125 , y=140+a)
+                        Label(staff_detail , text=mess_staff_record[8] ).place(x=1277 , y=140+a)
+                        
+                        
+                        a=a+30
+
+                elif staff_selectQuery.get()=="Number of Cleaner":
+                    cur.execute(("select count(*) from staff_detail where stf_post ='{}' or stf_post='{}'").format('SWEEPER', 'TOILET CLEANER'))
+                    
+                    Label(staff_detail , text ="Number of Cleaning  Staff  :-" +str((cur.fetchall())[0][0])).place(x=500 , y=80)
+                    cur.execute(("select * from staff_detail where stf_post='{}' or stf_post='{}'").format('SWEEPER', 'TOILET CLEANER'))
+                    cleaner_record=cur.fetchall()
+                    a=0
+                    Label(staff_detail , text="STAFF ID", font=('arial' , 10 , 'bold')).place(x=428 , y=110+a)
+                    Label(staff_detail , text="NAME" , font=('arial' , 10 , 'bold')).place(x=498, y=110+a)
+                    Label(staff_detail , text="GENDER", font=('arial' , 10 , 'bold') ).place(x=566 , y=110+a)
+                    Label(staff_detail , text="AGE" , font=('arial' , 10 , 'bold')).place(x=628 , y=110+a)
+                    Label(staff_detail , text="CONTACT NUMBER", font=('arial' , 10 , 'bold') ).place(x=663 , y=110+a)
+                    Label(staff_detail , text="DESIGNATION" , font=('arial' , 10 , 'bold')).place(x=793,y=110+a)
+                    Label(staff_detail , text="SALARY" , font=('arial' , 10 , 'bold')).place(x=898 , y=110+a)
+                    Label(staff_detail , text="DATE OF APPOINTMENT" , font=('arial' , 10 , 'bold')).place(x=960 , y=110+a)
+                    Label(staff_detail , text="DATE OF REGINATION " , font=('arial' , 10 , 'bold')).place(x=1123 , y=110+a)
+                    Label(staff_detail , text="CITY " , font=('arial' , 10 , 'bold')).place(x=1277 , y=110+a)
+                    for cleaner_staff_record in cleaner_record:
+                        Label(staff_detail , text=cleaner_staff_record[0] ).place(x=428 , y=140+a)
+                        Label(staff_detail , text=cleaner_staff_record[1] ).place(x=498 , y=140+a)
+                        Label(staff_detail , text=cleaner_staff_record[2] ).place(x=566 , y=140+a)
+                        Label(staff_detail , text=cleaner_staff_record[3] ).place(x=628 , y=140+a)
+                        Label(staff_detail , text=cleaner_staff_record[4] ).place(x=663 , y=140+a)
+                        Label(staff_detail , text=cleaner_staff_record[5] ).place(x=793 , y=140+a)
+                        Label(staff_detail , text=cleaner_staff_record[6] ).place(x=898 , y=140+a)
+                        Label(staff_detail , text=cleaner_staff_record[7] ).place(x=960 , y=140+a)
+                        Label(staff_detail , text=cleaner_staff_record[9] ).place(x=1123 , y=140+a)
+                        Label(staff_detail , text=cleaner_staff_record[8] ).place(x=1277 , y=140+a)
+                        a=a+30
+
+
+                elif staff_selectQuery.get()=="Number of Gaurd":
+                    cur.execute(("select count(*) from staff_detail where stf_post ='{}' ").format('GAURD'))
+                    
+                    Label(staff_detail , text ="Number of Gaurd :-" +str(cur.fetchall()[0][0])).place(x=500 , y=80)
+                    cur.execute(("select * from staff_detail where stf_post='{}' ").format('GAURD'))
+                    gaurd_record=cur.fetchall()
+                    a=0
+                    Label(staff_detail , text="STAFF ID", font=('arial' , 10 , 'bold')).place(x=428 , y=110+a)
+                    Label(staff_detail , text="NAME" , font=('arial' , 10 , 'bold')).place(x=498 , y=110+a)
+                    Label(staff_detail , text="GENDER", font=('arial' , 10 , 'bold') ).place(x=566 , y=110+a)
+                    Label(staff_detail , text="AGE" , font=('arial' , 10 , 'bold')).place(x=628 , y=110+a)
+                    Label(staff_detail , text="CONTACT NUMBER" , font=('arial' , 10 , 'bold')).place(x=663 , y=110+a)
+                    Label(staff_detail , text="DESIGNATION" , font=('arial' , 10 , 'bold')).place(x=793 , y=110+a)
+                    Label(staff_detail , text="SALARY", font=('arial' , 10 , 'bold') ).place(x=898 , y=110+a)
+                    Label(staff_detail , text="DATE OF APPOINTMENT" , font=('arial' , 10 , 'bold')).place(x=960 , y=110+a)
+                    Label(staff_detail , text="DATE OF REGINATION ", font=('arial' , 10 , 'bold') ).place(x=1123 , y=110+a)
+                    Label(staff_detail , text="CITY ", font=('arial' , 10 , 'bold') ).place(x=1277 , y=110+a)
+                    for gaurd_staff_record in gaurd_record:
+                        Label(staff_detail , text=gaurd_staff_record[0] ).place(x=428 , y=140+a)
+                        Label(staff_detail , text=gaurd_staff_record[1] ).place(x=498 , y=140+a)
+                        Label(staff_detail , text=gaurd_staff_record[2] ).place(x=566 , y=140+a)
+                        Label(staff_detail , text=gaurd_staff_record[3] ).place(x=628 , y=140+a)
+                        Label(staff_detail , text=gaurd_staff_record[4] ).place(x=663 , y=140+a)
+                        Label(staff_detail , text=gaurd_staff_record[5] ).place(x=793 , y=140+a)
+                        Label(staff_detail , text=gaurd_staff_record[6] ).place(x=898 , y=140+a)
+                        Label(staff_detail , text=gaurd_staff_record[7] ).place(x=960 , y=140+a)
+                        Label(staff_detail , text=gaurd_staff_record[9] ).place(x=1123 , y=140+a)
+                        Label(staff_detail , text=gaurd_staff_record[8] ).place(x=1277 , y=140+a)
+                        a=a+30
+                    
+
+                elif staff_selectQuery.get()== "Number of Manager":
+                    cur.execute(("select count(*) from staff_detail where stf_post ='{}' ").format('MANAGER'))
+                    Label(staff_detail , text ="Number of Manager  :-" +str(cur.fetchall()[0][0])).place(x=500 , y=80)
+                    cur.execute(("select * from staff_detail where stf_post='{}'").format('MANAGER'))
+                    manager_record=cur.fetchall()
+                    a=0
+                    Label(staff_detail , text="STAFF ID", font=('arial' , 10 , 'bold')).place(x=428 , y=110+a)
+                    Label(staff_detail , text="NAME", font=('arial' , 10 , 'bold') ).place(x=498 , y=110+a)
+                    Label(staff_detail , text="GENDER", font=('arial' , 10 , 'bold') ).place(x=566 , y=110+a)
+                    Label(staff_detail , text="AGE" , font=('arial' , 10 , 'bold')).place(x=628 , y=110+a)
+                    Label(staff_detail , text="CONTACT NUMBER" , font=('arial' , 10 , 'bold')).place(x=663 , y=110+a)
+                    Label(staff_detail , text="DESIGNATION" , font=('arial' , 10 , 'bold')).place(x=793 , y=110+a)
+                    Label(staff_detail , text="SALARY" , font=('arial' , 10 , 'bold')).place(x=898 , y=110+a)
+                    Label(staff_detail , text="DATE OF APPOINTMENT", font=('arial' , 10 , 'bold') ).place(x=960 , y=110+a)
+                    Label(staff_detail , text="DATE OF REGINATION ", font=('arial' , 10 , 'bold') ).place(x=1123 , y=110+a)
+                    Label(staff_detail , text="CITY " , font=('arial' , 10 , 'bold')).place(x=1277 , y=110+a)
+                    for manager_staff_record in manager_record:
+                        Label(staff_detail , text=manager_staff_record[0] ).place(x=428 , y=140+a)
+                        Label(staff_detail , text=manager_staff_record[1] ).place(x=498 , y=140+a)
+                        Label(staff_detail , text=manager_staff_record[2] ).place(x=566 , y=140+a)
+                        Label(staff_detail , text=manager_staff_record[3] ).place(x=628 , y=140+a)
+                        Label(staff_detail , text=manager_staff_record[4] ).place(x=663 , y=140+a)
+                        Label(staff_detail , text=manager_staff_record[5] ).place(x=793 , y=140+a)
+                        Label(staff_detail , text=manager_staff_record[6] ).place(x=898 , y=140+a)
+                        Label(staff_detail , text=manager_staff_record[7] ).place(x=960 , y=140+a)
+                        Label(staff_detail , text=manager_staff_record[9] ).place(x=1123 , y=140+a)
+                        Label(staff_detail , text=manager_staff_record[8] ).place(x=1277 , y=140+a)
+                        a=a+30
+
+                elif staff_selectQuery.get()=="Head of Institution ":
+                    cur.execute(("select stf_name from staff_detail where stfid='{}' ").format('1001S'))
+                    Label(staff_detail ,text =" HEAD :  "+cur.fetchall()[0][0]).place(x=500 , y=80)
+
+
+                                                                                          
+            def staff_remove_win():
+                remove_staff=Toplevel()
+                remove_staff.title(" REMOVING A STAFF ")
+                Label(remove_staff , text="Enter STAFF ID :").place(x=25 ,y=25)
+                Entry(remove_staff , textvariable = var8,width=15).place(x=125,y=25)
+
+                def REMOVE_staff():
+                    if var8.get() !="":
+                        a=messagebox.askquestion(" REMOVE STAFF " , "DO YOU REALLY WANT TO REMOVE STAFF ?")
+                        if a=="yes":
+                            st="UPDATE  staff_detail set DoRg=NOW() where stfid='{}'".format(var8.get())
+                            cur.execute(st)
+                            myco.commit()
+                            messagebox.showinfo(" STAFF REMOVED ", " STAFF WITH ID "+var8.get()+"  REMOVED ")
+                            staff_remove_win.destroy()
+                            
+                        else :
+                            REMOVE_staff.destroy()
+                    else :
+                        messagebox.showerror(" Null Input ", " PLEASE FILL INPUT THE STAFF ID TO REMOVED !! ")
+                Button(remove_staff, text=" REMOVE " ,command=REMOVE_staff ).place(x=70,y=65)
+                
+                
+                    
+                
+                remove_staff.geometry("250x100+500+300")
+            
+            Button(staff_detail, text="CLEAR " ,command=CLEAR_staff_query,bg='red' , fg='white').place(x=1250,y=45)   
+            Button(staff_detail, text="EXECUTE " ,command=execute_staff_query).place(x=1100,y=25)
+            Button(staff_detail, text="TO ADD STAFF " ,command=staff_registration_win).place(x=0,y=475)
+            Button(staff_detail, text="TO REMOVE STAFF ",command=staff_remove_win ).place(x=125,y=475)
+            
+            
+
+            staff_detail.geometry("1347x625+0+25")
+            staff_detail.mainloop
+
+            
+
+
+        def rules():
+            rule=Toplevel()
+            rule.title(" RULES & REGULATION ")
+
+            rule.geometry("900x500+170+100")
+            rule.mainloop
+
+
+        def hostel_detail():
+            detail=Toplevel()
+            detail.title(" HOSTEL DETAIL & INFRASTRUCTURE ")
+            Label(detail, text="")
+            detail.geometry("900x500+170+100")
+            detail.mainloop
+
+
+       
+
+        def fees():
+            cur.execute("select * from fee_structure")
+            feestructure=cur.fetchall()
+            feestruct=Toplevel()
+            feestruct.title("HOSTEL'S FEES STRUCTURE WINDOW")
+
+
+            f1 =Frame(feestruct,  highlightbackground="green", highlightcolor="green", highlightthickness=1,width=400,height=180,bd=1).place(x=60 ,y=8)
+
+            l31=Label(feestruct,text=" FEE STRUCTURE CHART ",relief='ridge',bd=8 , padx=5,font=('comic sans ms',15,"bold") ).place(x=105 ,y=10)
+  
+            a=0
+            l32=Label(feestruct,text="Serial No.|   Category        |  Month_Range   |    FEE",font='bold').place(x=75 ,y=70)
+
+            for i in feestructure:
+                a=a+20
+                s1=str(i[0])
+                s2=i[1]
+                s3=i[2]
+                s4=str(i[3])
+                l33=Label(feestruct,text='     '+s1+'         |  '+s2+' | '+s3+' | '+s4,font='bold').place(x=75 ,y=(75+a))
+
+            Label(feestruct,text="# Monthly fee :6000",font=('comic sans ms',10,'italic')).place(x=75 ,y=195)
+            Label(feestruct,text="# Fees should be submitted online in quaterly installment basis",font=('comic sans ms',10,'italic')).place(x=75 ,y=215)
+            Label(feestruct,text="# CAUTION MONEY : 2000 (to be once at time of registration",font=('comic sans ms',10,'italic')).place(x=75 ,y=235)
+            Label(feestruct,text="# NOTE : all the above numeric value under fee are given in INDIAN CURRENCY only)",font=('comic sans ms',10,'italic')).place(x=75 ,y=255)
+            Button(feestruct , text="Exit window" , fg="white" , bg="red", font=('arial',15, 'italic'),command=feestruct.destroy).place(x=50,y=300)
+    
+            feestruct.geometry("700x500")
+
+
+        Button(root,text="REGISTRATION",fg='white' , bg='black', font=(5), command=st_registration_win).place(x=25,y=140)
+        Button(root,text="HOSEL DETAILS & INFRASTURCTURE",fg='white' , bg='black',command=hostel_detail, font=(5)).place(x=175,y=140)
+        Button(root,text="STUDENT DETAILS",fg='white' , bg='black', font=(5),command=bt3e).place(x=500 , y=140)
+        Button(root,text="FEE STRUCTURE",fg='white' , bg='black', font=(5), command=fees).place(x=725,y=140)
+        Button(root,text="STAFF DETAILS",fg='white' , bg='black', font=(5), command=staff).place(x=925, y=140)
+        Button(root,text="RULES & REGULATION",fg='white' , bg='black', font=(5),command=rules).place(x=1100,y=140)
+
+        exitbutton=Button(root,text=" QUIT WINDOW / RE-LOGIN ", bg='red', fg='white', command=root.destroy).place(x=1150,y=600)
+        root.configure(bg="light blue")
+        root.geometry("5400x720+0+5")
+        root.mainloop
+
+        
+    else:
+   
+        messagebox.showerror("INADEQUATE  INPUT","INCORREST USER ID OR PASSWORD!!")
+        enterID.delete(0,END)
+        enterPASSWD.delete(0,END)
+        
+    
+
+labelloginid=Label(login, text="LOGIN ID").place(x=550 , y=290)
+labelloginppasswd=Label(login, text=" PASSWORD ").place(x=550 , y=340)
+enterID.place(x=650,y=290)
+enterPASSWD.place(x=650,y=340)
+BUTTONMAIN=Button(login, text="login " , command = RUN).place(x=650,y=390)
+
+
+login.geometry("5300x720+0+0")
+login.mainloop
+

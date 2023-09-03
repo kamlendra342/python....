@@ -1,0 +1,11 @@
+from tkinter import *
+from tkinter import messagebox
+root= Tk()
+
+C = Canvas(top, bg="blue", height=450, width=500)
+filename = PhotoImage(file = "C:\\Users\\Akash-PC\\Downloads\\output-onlinepngtools (3).png")
+background_label = Label(top, image=filename)
+background_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+C.pack()
+root.mainloop
